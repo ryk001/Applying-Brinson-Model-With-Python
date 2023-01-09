@@ -10,11 +10,14 @@ In the model, it supposed a performance of a portfolio can be attributed to 3 di
 - Selection Effect: you are good at picking stocks in the sector/ asset class
 - Interaction Effect: you are good at doing other things, such as market timing
 
-If we have to calculate this, we must have a portfolio and a benchmark; and gather 4 types of data
+If we have to calculate those effects, we must have a portfolio and a benchmark; and gather 4 types of data
 - r_benchmark: The rate of return of each field in the benchmark
 - w_benchmark: The weight of each field in the benchmark
 - r_portfolio: The rate of return of each field in the portfolio
 - w_portfolio: The weight of each field in the portfolio
+
+And the formula of those effects are shown as follow.
+
 
 Alright, now let's get started!
 
