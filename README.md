@@ -5,7 +5,12 @@ One of my classmate in Fudan told me that he had a great performance in HK stock
 Let's find out with Brinson Model.
 
 Before we started calculation, we have picked Heng Seng Index as our benchmark(cuz our portfolio traded at HK stock market).
-We also collected the four types of necessary data mentioned above.
+We also collected the four types of necessary data, they are...
+
+- return of each sector of Benckmark
+- weight of each sector of Benckmark
+- return of each sector of Portfolio
+- weight of each sector of Portfolio
 
 ![run](https://i.postimg.cc/44Pm6Jvw/2023-01-09-1-40-18.png)
 
