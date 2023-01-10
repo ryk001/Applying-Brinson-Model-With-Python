@@ -24,5 +24,5 @@ Alright, now let's get started!
 Before we started calculation, we have picked Heng Seng Index as our benchmark(cuz our portfolio traded at HK stock market).
 We also collected the four types of data mentioned above.
 
-![run](https://ibb.co/Fbc7sCB)
+![run](https://i.postimg.cc/44Pm6Jvw/2023-01-09-1-40-18.png))
 
