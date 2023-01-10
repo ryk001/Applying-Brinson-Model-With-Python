@@ -75,6 +75,119 @@ Before we further do the visualization, let's check our calculation with the `ex
 
 also equals to 
 
-`allocation_effect` add `selection_effect` add `interaction_effect`
+`allocation_effect` add `selection_effect` add `interaction_effect`.
+
+All we have to do is to verify this in our Brinson Model DataFrame.
+
+```python
+# checking calculation
+diff_of_excess_return = (brinson_model[brinson_model.sector=='Total'].excess_return - benchmark_and_portfolio[benchmark_and_portfolio.sector=='Total'].excess_return)
+if diff_of_excess_return.mean() < 0.000001:
+  print('no calculation error')
+else:
+  print('there is a calculation error')
+```
+
+The result shows `no calculation error`, wonderful! we can do the visualization now.
+
+## Visualization
+
+we first plot the cumulative return of the portfolio and benchmark.
+
+```python
+# cumulative return
+cumulative_return = pd.DataFrame()
+cumulative_return['date'] = benchmark_and_portfolio.date.unique()
+cumulative_return['benchmark'] = round(((benchmark_and_portfolio[benchmark_and_portfolio.sector=='Total'].r_benchmark.reset_index(drop=True)+1).cumprod()-1),5).to_list()
+cumulative_return['portfolio'] = round(((benchmark_and_portfolio[benchmark_and_portfolio.sector=='Total'].r_portfolio.reset_index(drop=True)+1).cumprod()-1),5).to_list()
+cumulative_return['cumulative_excess_return'] = cumulative_return['portfolio'] - cumulative_return['benchmark']
+
+# draw
+week = cumulative_return.index
+benchmark_return = cumulative_return['benchmark']*100
+portfolio_return = cumulative_return['portfolio']*100
+plt.figure(figsize=(12, 6))
+plt.plot(week, benchmark_return, label = "benchmark")
+plt.plot(week, portfolio_return, label = "portfolio")
+plt.xlabel('week')
+plt.ylabel('return (%)')
+plt.legend()
+plt.show()
+```
+![run](https://i.postimg.cc/VkPCL7zb/image.png)
+
+Then we draw each effects in Brinson Model along our holding period, aka 2022.
+
+```python
+# brinson period analysis
+week = brinson_model[brinson_model.sector=='Total'].reset_index(drop=True).index
+allocation_effect = brinson_model[brinson_model.sector=='Total'].allocation_effect
+selection_effect = brinson_model[brinson_model.sector=='Total'].selection_effect
+interaction_effect = brinson_model[brinson_model.sector=='Total'].interaction_effect
+width = 0.4
+
+plt.figure(figsize=(12, 12))
+plt.bar(week, allocation_effect)
+plt.bar(week, selection_effect, bottom = allocation_effect)
+plt.bar(week, interaction_effect, bottom = allocation_effect+selection_effect)
+plt.xlabel("week")
+plt.legend(['allocation effect', 'selection effect', 'interaction effect'])
+plt.show()
+```
+
+![run](https://i.postimg.cc/5tTHTpK0/2.png)
+
+Finally, we draw the average effects on each sector.
+
+```python
+[# brinson sector analysis
+brinson_sector_analysis = pd.DataFrame()
+
+brinson_sector_analysis['sector'] = brinson_model.sector.unique()
+brinson_sector_analysis['allocation_effect'] = np.nan
+brinson_sector_analysis['selection_effect'] = np.nan
+brinson_sector_analysis['interaction_effect'] = np.nan
+brinson_sector_analysis['excess_return'] = np.nan
+
+
+for i in range(len(brinson_model.sector.unique())):
+  s = brinson_model.sector.unique()[i]
+  allocation_effect = brinson_model[brinson_model.sector==s].allocation_effect.mean()
+  selection_effect = brinson_model[brinson_model.sector==s].selection_effect.mean()
+  interaction_effect = brinson_model[brinson_model.sector==s].interaction_effect.mean()
+  excess_return = brinson_model[brinson_model.sector==s].excess_return.mean()
+  
+  brinson_sector_analysis['allocation_effect'][i] = round(allocation_effect,5)
+  brinson_sector_analysis['selection_effect'][i] = round(selection_effect,5)
+  brinson_sector_analysis['interaction_effect'][i] = round(interaction_effect, 5)
+  brinson_sector_analysis['excess_return'][i] = round(excess_return, 5)
+
+pole = brinson_sector_analysis.sector.unique()
+ 
+# Initialise the spider plot by setting figure size and polar projection
+plt.figure(figsize=(15, 12))
+plt.subplot(polar=True)
+ 
+theta = np.linspace(0, 2 * np.pi, len(pole))
+ 
+# Arrange the grid into number of sales equal parts in degrees
+lines, labels = plt.thetagrids(range(0, 360, int(360/len(pole))), (pole), fontproperties=zhfont, fontsize=15)
+ 
+# Plot actual sales graph
+plt.plot(theta, (brinson_sector_analysis.allocation_effect*100).to_list())
+plt.plot(theta, (brinson_sector_analysis.selection_effect*100).to_list())
+plt.plot(theta, (brinson_sector_analysis.interaction_effect*100).to_list())
+ 
+# Add legend and title for the plot
+plt.legend(labels=('allocation effect', 'selection effect', 'interaction effect'), loc=0, fontsize=8)
+plt.title("average effect by sector (%)", fontsize=20)
+ 
+plt.show()](https://i.postimg.cc/ZK5TPpjD/3.png)
+```
+
+![run](https://i.postimg.cc/ZK5TPpjD/3.png)
+
+Voila!!!
+
 
 
