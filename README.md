@@ -1,5 +1,7 @@
 # Applying Brinson Model to a portfolio in 2022 with Python!
 
+full code: https://colab.research.google.com/drive/1-E7UtjC8w4Yf4s-EvDesNByvDtLRZnix#scrollTo=6_axfQ4VDr0o
+
 ## Intro
 One of my classmate in Fudan told me that he had a great performance in HK stock market in 2022, is it true? Where was his performance come from?
 
