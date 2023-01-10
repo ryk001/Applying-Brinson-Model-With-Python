@@ -22,4 +22,6 @@ And the formula of those effects are shown as follow.
 Alright, now let's get started!
 
 Before we started calculation, we have picked Heng Seng Index as our benchmark(cuz our portfolio traded at HK stock market).
-We also 
+We also collected the four types of data mentioned above.
+
+
