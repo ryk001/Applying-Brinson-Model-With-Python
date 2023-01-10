@@ -1,7 +1,8 @@
 # Applying Brinson Model to a portfolio in 2022 with Python!
 
 ## Intro
-One of my classmate in Fudan told me that he had a great performance in HK stock market in 2022, is it true?
+One of my classmate in Fudan told me that he had a great performance in HK stock market in 2022, is it true? Where was his performance come from?
+
 Let's find out with Brinson Model.
 
 Before we started calculation, we have picked Heng Seng Index as our benchmark(cuz our portfolio traded at HK stock market).
