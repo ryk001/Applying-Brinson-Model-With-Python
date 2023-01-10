@@ -1,7 +1,7 @@
 # Applying Brinson Model to a portfolio in 2022 with Python!
 
-[full code in Colab](https://colab.research.google.com/drive/1-E7UtjC8w4Yf4s-EvDesNByvDtLRZnix?usp=sharing)
-[Medium post(Chinese)](https://medium.com/@ryan888811/實戰-用-python-計算多期-brinson-model-c93b14b9e664)
+- [full code in Colab](https://colab.research.google.com/drive/1-E7UtjC8w4Yf4s-EvDesNByvDtLRZnix?usp=sharing)
+- [Medium post(Chinese)](https://medium.com/@ryan888811/實戰-用-python-計算多期-brinson-model-c93b14b9e664)
 
 ## Intro
 One of my classmate in Fudan told me that he had a great performance in HK stock market in 2022, is it true? Where was his performance come from?
